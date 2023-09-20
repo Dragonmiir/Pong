@@ -1,4 +1,8 @@
+# Código feito com a biblioteca de turtle
+
 import turtle
+
+# Tela do jogo
 
 tela = turtle.Screen()
 tela.title("Pong Estudo")
@@ -34,6 +38,9 @@ bola.shape("square")
 bola.color("white")
 bola.penup()
 bola.goto(0, 0)
+bola.dx = 0.2
+bola.dy = 0.2
+
 
 # Funções para fazer com que as barras se movam
 
@@ -77,3 +84,37 @@ tela.onkeypress(barra_b_baixo, "Down")
 # Main game loop
 while True:
     tela.update()
+
+    # Movimentação da bola
+
+    bola.setx(bola.xcor() + bola.dx)
+    bola.sety(bola.ycor() + bola.dy)
+
+    # Limite das bordas de cima e de baixo
+
+    if bola.ycor() > 290:
+        bola.sety(290)
+        bola.dy *= -1
+
+    if bola.ycor() < -290:
+        bola.sety(-290)
+        bola.dy *= -1
+
+    # bordas da direta e da esquerda
+    
+    if bola.xcor() > 390:
+        bola.goto(0, 0)
+        bola.dx *= -1
+
+    if bola.xcor() < -390:
+        bola.goto(0, 0)
+        bola.dx *= -1
+
+    # Colisão das barras com a bola
+    if (bola.xcor() > 340 and bola.xcor() < 350) and (bola.ycor() < barra_b.ycor() + 40 and bola.ycor() > barra_b.ycor() -40):
+        bola.setx(340)
+        bola.dx *= -1
+
+    if (bola.xcor() < -340 and bola.xcor() > -350) and (bola.ycor() < barra_a.ycor() + 40 and bola.ycor() > barra_a.ycor() -40):
+        bola.setx(-340)
+        bola.dx *= -1
