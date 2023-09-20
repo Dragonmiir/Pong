@@ -41,6 +41,21 @@ bola.goto(0, 0)
 bola.dx = 0.2
 bola.dy = 0.2
 
+# Placar
+
+placar_a = 0
+
+placar_b = 0
+
+# Visual do placar
+
+placar = turtle.Turtle()
+placar.speed(0)
+placar.color("white")
+placar.penup()
+placar.hideturtle()
+placar.goto(0, 260)
+placar.write("Jogador A = 0  Jogador B = 0", align="center", font=("Arial", 24, "normal"))
 
 # Funções para fazer com que as barras se movam
 
@@ -105,10 +120,17 @@ while True:
     if bola.xcor() > 390:
         bola.goto(0, 0)
         bola.dx *= -1
+        placar_a += 1
+        placar.clear()
+        placar.write("Jogador A = {}  Jogador B = {}".format(placar_a, placar_b), align="center", font=("Arial", 24, "normal"))
+
 
     if bola.xcor() < -390:
         bola.goto(0, 0)
         bola.dx *= -1
+        placar_b += 1
+        placar.clear()
+        placar.write("Jogador A = {}  Jogador B = {}".format(placar_a, placar_b), align="center", font=("Arial", 24, "normal"))
 
     # Colisão das barras com a bola
     if (bola.xcor() > 340 and bola.xcor() < 350) and (bola.ycor() < barra_b.ycor() + 40 and bola.ycor() > barra_b.ycor() -40):
